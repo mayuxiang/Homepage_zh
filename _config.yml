@@ -17,12 +17,6 @@ talkmap_link             : false
 comments:
   provider               : false
 
-# SEO Related
-google_site_verification :
-bing_site_verification   :
-yandex_site_verification :
-
-
 # Site Author
 author:
   name             : "MA, Yuxiang"
