@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{{ .Site.Home.RelPermalink }}" class="site-logo">
+      <span class="logo-name">{{ .Site.Data.site.name }}</span>
+      <span class="logo-uni">（{{ .Site.Data.site.nameEn }}）</span>
+    </a>
+    <div class="nav-controls">
+      <nav class="site-nav" aria-label="主导航">
+        {{ $current := . }}
+        {{ range .Site.Data.site.nav }}
+          {{ $isActive := false }}
+          {{ if $current.IsHome }}
+            {{ if eq .url "/" }}{{ $isActive = true }}{{ end }}
+          {{ else }}
+            {{ if and (ne .url "/") (hasPrefix $current.RelPermalink .url) }}{{ $isActive = true }}{{ end }}
+          {{ end }}
+          <a href="{{ .url }}" class="nav-link{{ if $isActive }} active{{ end }}">{{ .name }}</a>
+        {{ end }}
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="切换深色主题" aria-pressed="false">☾</button>
+      <button class="mobile-menu-btn" aria-label="菜单" id="mobileMenuBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>

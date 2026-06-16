@@ -1,0 +1,13 @@
+metrics:
+  - number: 39
+    label: "学术论文"
+    suffix: " 篇"
+    link: "/publications/"
+  - number: 1010
+    label: "被引次数"
+    suffix: ""
+    link: "https://scholar.google.com/citations?user=x9u1TtwAAAAJ&hl=zh-CN"
+  - number: 5
+    label: "国家级/省部级项目"
+    suffix: " 项"
+    link: "/projects/"

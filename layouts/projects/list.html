@@ -1,0 +1,59 @@
+{{ define "main" }}
+{{ $pr := .Site.Data.projects }}
+<section class="page-hero">
+  <div class="container">
+    <h1>科研项目</h1>
+    <p class="page-subtitle">主持/负责的纵向科研项目与横向合作项目。</p>
+  </div>
+</section>
+
+<section class="page-content">
+  <div class="container">
+    <!-- Longitudinal -->
+    <div class="content-card">
+      <h2>纵向科研项目</h2>
+      <div class="project-list">
+        {{ range $pr.longitudinal }}
+        <div class="project-item">
+          <div class="project-title">{{ .title }}</div>
+          <div class="project-meta">
+            <span class="project-source">{{ .source }}</span>
+            <span class="project-period">{{ .period }}</span>
+            <span class="project-role">{{ .role }}</span>
+            <span class="project-status project-status-{{ .status }}">{{ .status }}</span>
+          </div>
+          {{ with .keywords }}
+          <div class="project-keywords">
+            {{ range . }}<span class="project-kw">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- Horizontal -->
+    <div class="content-card">
+      <h2>横向合作项目</h2>
+      <div class="project-list">
+        {{ range $pr.horizontal }}
+        <div class="project-item">
+          <div class="project-title">{{ .title }}</div>
+          <div class="project-meta">
+            <span class="project-source">{{ .client }}</span>
+            <span class="project-period">{{ .period }}</span>
+            <span class="project-role">{{ .role }}</span>
+            <span class="project-status project-status-{{ .status }}">{{ .status }}</span>
+          </div>
+          {{ with .keywords }}
+          <div class="project-keywords">
+            {{ range . }}<span class="project-kw">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

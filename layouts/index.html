@@ -1,0 +1,173 @@
+{{ define "main" }}
+{{ $s := .Site.Data.site }}
+{{ $metrics := .Site.Data.metrics }}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-info">
+      <h1 class="hero-name">{{ $s.name }}</h1>
+      <p class="hero-title-line">{{ $s.title }} · {{ $s.affiliation }}</p>
+      {{ with $s.honors }}
+      <p class="hero-honors">{{ delimit . " · " }}</p>
+      {{ end }}
+      {{ with $s.oneliner }}<p class="hero-oneliner">{{ . }}</p>{{ end }}
+      <p class="hero-email"><a class="email-link" href="#" data-user="{{ index (split $s.email `@`) 0 }}" data-domain="{{ index (split $s.email `@`) 1 }}"><span class="e-user">{{ index (split $s.email `@`) 0 }}</span><span class="e-at">@</span><span class="e-domain">{{ index (split $s.email `@`) 1 }}</span></a></p>
+      <div class="hero-typing">
+        <span class="typing-prefix">研究方向：</span>
+        <span class="typing-text" id="typingText"></span>
+        <span class="typing-cursor">|</span>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <img src="/images/me.webp" alt="{{ $s.name }}" width="200" height="200" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="metrics reveal">
+  <div class="container">
+    <div class="metrics-grid">
+      {{ range $metrics.metrics }}
+      {{ $isExternal := hasPrefix .link "http" }}
+      {{ if .link }}
+      <a class="metric-card metric-clickable" href="{{ .link }}" {{ if $isExternal }}target="_blank" rel="noopener"{{ end }}>
+      {{ else }}
+      <div class="metric-card">
+      {{ end }}
+        <div class="metric-number" data-count="{{ .number }}">{{ .number }}<span class="metric-suffix">{{ .suffix }}</span></div>
+        <div class="metric-label">{{ .label }}</div>
+        {{ with .note }}<div class="metric-note">{{ . }}</div>{{ end }}
+      {{ if .link }}
+      </a>
+      {{ else }}
+      </div>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+
+<!-- EXPERIENCE TIMELINE -->
+<section class="section section-compact">
+  <div class="container">
+    <h2 class="section-title">学术经历</h2>
+    <div class="timeline-horizontal">
+      {{ range $i, $exp := $s.experience }}
+      <div class="timeline-h-item reveal" data-timeline="{{ $i }}">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-content">
+          <span class="timeline-h-period">{{ $exp.period }}</span>
+          <span class="timeline-h-title">{{ $exp.title }}</span>
+          <span class="timeline-h-org">{{ $exp.org }}</span>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND -->
+<section class="section section-beyond reveal">
+  <div class="container">
+    <h2 class="section-title">学术之外</h2>
+    <div class="beyond-grid">
+      <div class="focus-card" style="text-align:center">
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:.3rem">
+          <svg style="color:#06B6D4;flex-shrink:0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span style="color:#06B6D4;font-size:1.6rem;font-weight:750;line-height:1">旅行</span>
+        </div>
+        <div class="beyond-desc">足迹遍布中国 30 个省级行政区<br>170 余座城市</div>
+      </div>
+      <div class="focus-card" style="text-align:center">
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:.3rem">
+          <svg style="color:#2563EB;flex-shrink:0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span style="color:#2563EB;font-size:1.6rem;font-weight:750;line-height:1">长跑</span>
+        </div>
+        <div class="beyond-desc">完成 2 场马拉松<br>全马 PB 4:15</div>
+      </div>
+      <div class="focus-card" style="text-align:center">
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:.3rem">
+          <svg style="color:#7C3AED;flex-shrink:0" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span style="color:#7C3AED;font-size:1.6rem;font-weight:750;line-height:1">爱好</span>
+        </div>
+        <div class="beyond-desc">摄影、阅读、集邮</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPING + COUNT-UP + TIMELINE GLOW SCRIPT -->
+<script>
+(function() {
+  var tags = [{{ range $i, $t := $s.researchTags }}{{ if $i }}, {{ end }}"{{ $t }}"{{ end }}];
+  var el = document.getElementById('typingText');
+  var cursor = document.querySelector('.typing-cursor');
+  if (!el || !tags.length) return;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) { el.textContent = tags[0]; if (cursor) cursor.style.display = 'none'; return; }
+  var tagIdx = 0, charIdx = 0, deleting = false, paused = false;
+  function tick() {
+    if (paused) return;
+    var word = tags[tagIdx];
+    if (!deleting) {
+      el.textContent = word.substring(0, charIdx + 1); charIdx++;
+      if (charIdx === word.length) { paused = true; setTimeout(function() { paused = false; deleting = true; tick(); }, 2200); return; }
+      setTimeout(tick, 80 + Math.random() * 40);
+    } else {
+      el.textContent = word.substring(0, charIdx - 1); charIdx--;
+      if (charIdx === 0) { deleting = false; tagIdx = (tagIdx + 1) % tags.length; setTimeout(tick, 300); return; }
+      setTimeout(tick, 40 + Math.random() * 30);
+    }
+  }
+  setTimeout(tick, 600);
+})();
+
+/* Count-up */
+(function() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var counted = new Set();
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var num = parseInt(entry.target.getAttribute('data-count'));
+      if (isNaN(num) || counted.has(entry.target)) return;
+      counted.add(entry.target);
+      var start = 0, duration = 1200, startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        entry.target.textContent = Math.floor(start + (num - start) * eased);
+        var suffix = entry.target.nextElementSibling;
+        if (suffix && suffix.classList.contains('metric-suffix')) { /* keep suffix */ }
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.metric-number[data-count]').forEach(function(el) { observer.observe(el); });
+})();
+
+/* Timeline glow */
+(function() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry, i) {
+      if (entry.isIntersecting) {
+        setTimeout(function() { entry.target.classList.add('glow'); }, i * 200);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.timeline-h-item[data-timeline] .timeline-h-dot').forEach(function(el) { observer.observe(el); });
+})();
+</script>
+{{ end }}

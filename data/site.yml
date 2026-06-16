@@ -1,0 +1,89 @@
+# Site-wide configuration
+name: "马宇翔"
+nameEn: "MA, Yuxiang"
+title: "研究员"
+affiliation: "河南大学 计算机与信息工程学院"
+uni: "河南大学"
+oneliner: ""
+email: "y.x.ma@hotmail.com"
+sameAs:
+  - "https://scholar.google.com/citations?user=x9u1TtwAAAAJ&hl=zh-CN"
+  - "https://cs.henu.edu.cn/info/1272/5506.htm"
+  - "https://yuxiangma.com"
+
+nav:
+  - name: "首页"
+    url: "/"
+  - name: "研究"
+    url: "/research/"
+  - name: "成果"
+    url: "/publications/"
+  - name: "项目"
+    url: "/projects/"
+  - name: "团队"
+    url: "/team/"
+
+honors:
+  - "河南省优秀青年科学基金获得者"
+  - "河南省首席科普专家"
+  - "河南省青年人才托举工程入选者"
+
+researchTags:
+  - "信息安全"
+  - "智慧网络"
+  - "具身智能"
+  - "可信智能"
+
+researchDirections:
+  - title: "信息安全与隐私保护"
+    tag: "信息安全"
+    summary: "网络威胁检测、加密流量分析与隐私保护架构"
+    core: "网络入侵检测、加密流量分类、隐私保护与可问责架构"
+    methods: "深度学习、对比学习、差分隐私、区块链"
+    relatedPublications:
+      - "APCN: A Scalable Architecture for Balancing Accountability and Privacy in Large-Scale Content-Based Networks"
+      - "Encrypted traffic classification based on Gaussian mixture models and Hidden Markov Models"
+      - "ICloud: An Intrusion Detection and Dynamic Defense Mechanism for Cloud Environments"
+      - "A Balanced Supervised Contrastive Learning-based Method for Encrypted Network Traffic Classification"
+      - "Anomaly Detection Model for Edge Network Infrastructure Based on Time Series"
+    relatedProjects:
+      - "基于人工智能+区块链的 5G 网络行为监管关键技术研究"
+      - "面向大规模数据跨域传输的隐私保护与行为监管机制研究"
+  - title: "智慧网络与资源调度"
+    tag: "智慧网络"
+    summary: "意图路由、GPU 资源共享与网络性能优化"
+    core: "自适应路由架构、GPU 共享调度、网络异常预测"
+    methods: "意图驱动网络、强化学习、负载均衡"
+    relatedPublications:
+      - "Fragmentation-Aware and Efficiency-oriented Scheduling for GPU Sharing Workloads"
+      - "UINT: An Intent-based Adaptive Routing Architecture"
+      - "Deep reinforcement learning for blockchain in industrial IoT"
+    relatedProjects:
+      - "资源受限条件下 5G 网联无人机可信接入链路构建机制研究"
+  - title: "可信智能与多模态计算"
+    tag: "可信AI"
+    summary: "多模态语义理解与大模型安全治理"
+    core: "视觉-语言语义对齐、大模型安全评估"
+    methods: "多模态融合、多智能体强化学习、大模型微调"
+    relatedPublications:
+      - "Dynamic Alignment of Visual and Language Semantics for Referring Video Object Segmentation"
+      - "Global-aware attention network for multi-modal sarcasm detection"
+    relatedProjects:
+      - "基于大模型的铁路勘察设计领域多智能体强化微调方法研究"
+
+footer:
+  copyright: "© 2026 MA, Yuxiang. All rights reserved."
+
+experience:
+  - period: "2013.09 – 2019.06"
+    title: "工学博士（硕博连读）"
+    org: "中国科学院"
+  - period: "2019.07 – 2022.12"
+    title: "讲师/校聘副教授"
+    org: "河南大学"
+  - period: "2023.01 – 2024.03"
+    title: "副教授"
+    org: "河南大学"
+  - period: "2024.04 – 至今"
+    title: "研究员"
+    org: "河南大学"

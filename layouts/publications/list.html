@@ -1,0 +1,103 @@
+{{ define "main" }}
+{{ $p := .Site.Data.publications }}
+<section class="page-hero">
+  <div class="container">
+    <h1>学术成果</h1>
+    <p class="page-subtitle">{{ $p.fullNote | safeHTML }}</p>
+  </div>
+</section>
+
+<section class="page-content">
+  <div class="container">
+    <!-- Year Filter -->
+    <div class="pub-year-filter reveal">
+      <button class="active" data-filter="all">全部</button>
+      <button data-filter="2026">2026</button>
+      <button data-filter="2025">2025</button>
+      <button data-filter="2024">2024</button>
+      <button data-filter="2020">2020</button>
+    </div>
+
+    <!-- Selected Papers -->
+    <div class="content-card reveal">
+      <h2>代表性论文</h2>
+      <div class="pub-card-list">
+        {{ range $p.selected }}
+        <div class="pub-card" data-year="{{ .year }}">
+          <div class="pub-card-top">
+            <div class="pub-card-title">{{ .title }}</div>
+            <span class="pub-year">{{ .year }}</span>
+          </div>
+          <div class="pub-card-authors" data-highlight="Ma Yuxiang">{{ .authors }}</div>
+          <div class="pub-card-venue">{{ .journal }}{{ with .volume }}, {{ . }}{{ end }}{{ with .pages }}, {{ . }}{{ end }}</div>
+          {{ with .tags }}
+          <div class="pub-card-tags">
+            {{ range . }}<span class="pub-tag">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- Monograph -->
+    <div class="content-card reveal">
+      <h2>专著</h2>
+      <div class="monograph-card">
+        <img src="/images/book-cover.jpg" alt="{{ $p.monograph.title }}" class="monograph-cover" loading="lazy">
+        <div class="monograph-info">
+          <div class="monograph-title"><a href="{{ $p.monograph.link }}" target="_blank" rel="noopener">{{ $p.monograph.title }}</a></div>
+          <div class="monograph-authors">{{ $p.monograph.authors }}</div>
+          <div class="monograph-meta">{{ $p.monograph.publisher }}, {{ $p.monograph.year }}</div>
+          <div class="monograph-meta">ISBN {{ $p.monograph.isbn }}</div>
+          <a href="{{ $p.monograph.link }}" target="_blank" rel="noopener" class="btn btn-secondary monograph-btn">Springer 链接</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patents -->
+    {{ with $p.patents }}{{ if gt (len .) 0 }}
+    <div class="content-card reveal">
+      <h2>授权专利</h2>
+      {{ range . }}
+      <div class="pub-card">
+        <div class="pub-card-title">{{ .title }}</div>
+        <div class="pub-card-venue">{{ .number }} · {{ .year }}</div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}{{ end }}
+
+    <!-- Software Copyrights -->
+    {{ with $p.softwareCopyrights }}{{ if gt (len .) 0 }}
+    <div class="content-card reveal">
+      <h2>软件著作权</h2>
+      {{ range . }}
+      <div class="pub-card">
+        <div class="pub-card-title">{{ .title }}</div>
+        <div class="pub-card-venue">{{ .number }} · {{ .year }}</div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}{{ end }}
+  </div>
+</section>
+
+<script>
+/* Year filter */
+(function() {
+  var btns = document.querySelectorAll('.pub-year-filter button');
+  var cards = document.querySelectorAll('.pub-card[data-year]');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      cards.forEach(function(card) {
+        card.style.display = (filter === 'all' || card.getAttribute('data-year') === filter) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+{{ end }}
