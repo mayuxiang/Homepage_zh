@@ -42,7 +42,6 @@
 
   {{ partial "seo.html" . }}
   <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-600.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-latin-700.woff2" crossorigin>
   {{ $css := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
   <link rel="icon" type="image/png" href="/images/logo.png">
