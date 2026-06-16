@@ -6,7 +6,7 @@
         <p>{{ $s.footer.copyright }}</p>
       </div>
       <div class="footer-links">
-        <a class="email-link" href="#" data-user="{{ index (split $s.email `@`) 0 }}" data-domain="{{ index (split $s.email `@`) 1 }}">邮件联系</a>
+        <a class="email-link" href="#" data-user="{{ $s.email_user }}" data-domain="{{ $s.email_domain }}">邮件联系</a>
         <a href="https://www.henu.edu.cn/" target="_blank" rel="noopener">河南大学</a>
         <a href="https://cs.henu.edu.cn/" target="_blank" rel="noopener">计算机与信息工程学院</a>
         <a href="https://cs.henu.edu.cn/info/1272/5506.htm" target="_blank" rel="noopener">官网主页</a>

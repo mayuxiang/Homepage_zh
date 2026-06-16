@@ -81,9 +81,9 @@
         <li>有竞争力的科研助学金与成果奖励</li>
       </ul>
       <h3 class="recruit-apply-title">如何申请</h3>
-      <p class="recruit-mail-note">请发送邮件至：<code><span class="e-user">{{ index (split $.Site.Data.site.email `@`) 0 }}</span><span class="e-at">@</span><span class="e-domain">{{ index (split $.Site.Data.site.email `@`) 1 }}</span></code></p>
+      <p class="recruit-mail-note">请发送邮件至：<code><span class="e-user">{{ $.Site.Data.site.email_user }}</span><span class="e-at">@</span><span class="e-domain">{{ $.Site.Data.site.email_domain }}</span></code></p>
       <p class="recruit-apply-sub">邮件主题：申请加入-姓名-专业。</p>
-      <a class="btn btn-primary email-link recruit-mail-btn" href="#" data-user="{{ index (split $.Site.Data.site.email `@`) 0 }}" data-domain="{{ index (split $.Site.Data.site.email `@`) 1 }}">发送申请邮件</a>
+      <a class="btn btn-primary email-link recruit-mail-btn" href="#" data-user="{{ $.Site.Data.site.email_user }}" data-domain="{{ $.Site.Data.site.email_domain }}">发送申请邮件</a>
     </div>
   </div>
 </section>
