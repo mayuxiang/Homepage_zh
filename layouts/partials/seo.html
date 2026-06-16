@@ -11,7 +11,6 @@
     "@type": "Organization",
     "name": "{{ $s.affiliation }}"
   },
-  "email": "{{ $s.email }}",
   "url": "{{ .Site.BaseURL }}",
   "image": "{{ .Site.BaseURL }}images/me.webp",
   "description": "{{ if $s.oneliner }}{{ $s.oneliner }}{{ else }}{{ $s.name }} — {{ $s.affiliation }}{{ end }}",
