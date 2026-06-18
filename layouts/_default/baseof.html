@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <!-- Redirect mayuxiang.github.io → mayuxiang.com -->
+  {{ if ne .Site.BaseURL "https://mayuxiang.com/" }}
+  <meta http-equiv="refresh" content="0;url=https://mayuxiang.com/{{ .RelPermalink }}">
+  <script>window.location.replace("https://mayuxiang.com/" + window.location.pathname + window.location.search + window.location.hash);</script>
+  {{ end }}
   <!-- Anti-FOUC: set theme before paint -->
   <script>
   (function(){
