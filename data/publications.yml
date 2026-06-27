@@ -64,7 +64,7 @@ selected:
     pdf: ""
     bibtex: ""
     note: ""
-  - authors: "Ge Qiang, Liu Huaizhou, Ma Yuxiang*, et al."
+  - authors: "Ge Qiang, Liu Huaizhou, Ma Yuxiang*, Han Daojun, Zuo Xianyu, Dang Lanxue"
     title: "Shuffle-RDSNet: Side-scan Sonar Image Classification"
     journal: "The Journal of Supercomputing"
     year: 2024
