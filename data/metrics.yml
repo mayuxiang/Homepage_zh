@@ -5,7 +5,7 @@ metrics:
     link: "/publications/"
   - number: "1000+"
     label: "被引次数"
-    suffix: " 次"
+    suffix: ""
     link: "/publications/"
   - number: 5
     label: "国家级/省部级项目"
