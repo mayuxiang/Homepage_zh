@@ -41,7 +41,7 @@
       {{ else }}
       <div class="metric-card">
       {{ end }}
-        <div class="metric-number" data-count="{{ .number }}">{{ .number }}</div><span class="metric-suffix">{{ .suffix }}</span>
+        <div class="metric-number" data-count="{{ .number }}">{{ .number }}<span class="metric-suffix">{{ .suffix }}</span></div>
         <div class="metric-label">{{ .label }}</div>
         {{ with .note }}<div class="metric-note">{{ . }}</div>{{ end }}
       {{ if .link }}
