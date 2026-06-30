@@ -214,6 +214,7 @@ h1,h2,h3,h4,.hero-name,.section-title,.page-hero h1{color:var(--color-ink)}
 .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
 .footer-info p{font-size:.85rem;color:var(--color-muted)}
 .footer-links{display:flex;gap:1rem}
+.footer-links span{font-size:.85rem;color:var(--color-muted)}
 .footer-links a{font-size:.85rem;color:var(--color-muted)}
 .footer-links a:hover{color:var(--color-primary)}
 
