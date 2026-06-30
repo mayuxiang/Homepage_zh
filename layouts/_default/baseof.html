@@ -51,7 +51,7 @@
   {{ if .IsHome }}<link rel="alternate" hreflang="en" href="https://yuxiangma.com/">{{ end }}
 
   {{ partial "seo.html" . }}
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-600.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-400.woff2" crossorigin>
   {{ $css := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
   <link rel="icon" type="image/png" href="/images/logo.png">
@@ -69,14 +69,24 @@
     var nav = document.querySelector('.site-nav');
     if (!btn || !nav) return;
     btn.setAttribute('aria-expanded', 'false');
-    var close = function () { nav.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; };
     btn.addEventListener('click', function () {
       var open = nav.classList.toggle('open');
       btn.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        var firstLink = nav.querySelector('.nav-link');
+        if (firstLink) setTimeout(function(){ firstLink.focus(); }, 100);
+      } else {
+        btn.focus();
+      }
     });
-    nav.querySelectorAll('.nav-link').forEach(function (link) { link.addEventListener('click', close); });
+    nav.querySelectorAll('.nav-link').forEach(function (link) { link.addEventListener('click', function(){
+      nav.classList.remove('open'); btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      btn.focus();
+    }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) close(); });
   })();
   /* Theme toggle */

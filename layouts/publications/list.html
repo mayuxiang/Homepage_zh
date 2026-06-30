@@ -3,7 +3,7 @@
 <section class="page-hero">
   <div class="container">
     <h1>学术成果</h1>
-    <p class="page-subtitle">{{ $p.fullNote | safeHTML }}</p>
+    <p class="page-subtitle">{{ $p.fullNote | markdownify }}</p>
   </div>
 </section>
 

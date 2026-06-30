@@ -10,6 +10,7 @@
 :root[data-theme="dark"]{--color-bg:#0B1220;--color-bg-soft:#0E1626;--color-surface:rgba(20,30,52,.66);--color-surface-tint:rgba(37,99,235,.08);--color-ink:#EEF3FF;--color-text:#C5CFE4;--color-muted:#8A97B5;--color-border:rgba(120,160,255,.16);--color-border-soft:rgba(120,160,255,.10);--color-primary-light:rgba(37,99,235,.12);--shadow:0 1px 2px rgba(0,0,0,.2),0 10px 28px rgba(0,0,0,.3);--shadow-hover:0 16px 40px rgba(37,99,235,.14)}
 
 /* ===== Reset ===== */
+*{-webkit-tap-highlight-color:transparent}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--font-sans);color:var(--color-text);background:var(--color-bg-soft);font-size:1.06rem;line-height:1.75;-webkit-font-smoothing:antialiased;transition:background-color .3s,color .3s}
@@ -251,11 +252,13 @@ a:focus-visible,.btn:focus-visible,.nav-link:focus-visible,.theme-toggle:focus-v
   .monograph-card{flex-direction:column;align-items:center;text-align:center}
   .monograph-cover{width:140px}
   .footer-content{flex-direction:column;text-align:center}
-  .mobile-menu-btn{display:flex}
+  .mobile-menu-btn{display:flex;padding:10px;min-width:44px;min-height:44px;justify-content:center}
   .site-nav{display:none;position:absolute;top:60px;left:0;right:0;background:var(--color-bg);border-bottom:1px solid var(--color-border-soft);flex-direction:column;padding:.5rem 1rem 1rem;box-shadow:var(--shadow)}
   .site-nav.open{display:flex}
-  .nav-link{padding:.6rem .75rem}
+  .nav-link{padding:.8rem .9rem}
   .nav-link.active::after{display:none}
+  .theme-toggle{width:44px;height:44px}
+  .pub-card-title,.project-title,.monograph-title{overflow-wrap:anywhere}
   .timeline-horizontal{flex-direction:column;align-items:flex-start;gap:1.5rem;padding:1rem 0 1rem 1.5rem}
   .timeline-horizontal::before{top:0;bottom:0;left:.5rem;width:3px;height:auto;right:auto}
   .timeline-horizontal::after{display:none}

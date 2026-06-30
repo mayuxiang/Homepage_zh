@@ -5,7 +5,7 @@
       <span class="logo-uni">（{{ .Site.Data.site.nameEn }}）</span>
     </a>
     <div class="nav-controls">
-      <nav class="site-nav" aria-label="主导航">
+      <nav class="site-nav" aria-label="主导航" id="siteNav">
         {{ $current := . }}
         {{ range .Site.Data.site.nav }}
           {{ $isActive := false }}
@@ -18,7 +18,7 @@
         {{ end }}
       </nav>
       <button class="theme-toggle" id="themeToggle" aria-label="切换深色主题" aria-pressed="false">☾</button>
-      <button class="mobile-menu-btn" aria-label="菜单" id="mobileMenuBtn">
+      <button class="mobile-menu-btn" aria-label="菜单" id="mobileMenuBtn" aria-controls="siteNav">
         <span></span><span></span><span></span>
       </button>
     </div>

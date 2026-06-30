@@ -1,18 +1,14 @@
 baseURL = "https://mayuxiang.com"
-locale = "zh-cn"
+languageCode = "zh-CN"
 title = "马宇翔@河南大学"
 enableRobotsTXT = true
-enableSitemap = true
 
 disableKinds = ["taxonomy", "term", "RSS"]
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = true
-
-[build]
-  writeStats = true
+      unsafe = false
 
 [outputs]
   home = ["HTML"]
