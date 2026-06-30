@@ -46,8 +46,9 @@
   <meta name="twitter:image" content="{{ .Site.BaseURL }}images/me.webp">
 
   <!-- hreflang -->
+  <link rel="alternate" hreflang="x-default" href="{{ .Site.BaseURL }}">
   <link rel="alternate" hreflang="zh-CN" href="{{ .Permalink }}">
-  <link rel="alternate" hreflang="en" href="https://yuxiangma.com/">
+  {{ if .IsHome }}<link rel="alternate" hreflang="en" href="https://yuxiangma.com/">{{ end }}
 
   {{ partial "seo.html" . }}
   <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-600.woff2" crossorigin>

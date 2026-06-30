@@ -13,10 +13,10 @@
       {{ end }}
       {{ with $s.oneliner }}<p class="hero-oneliner">{{ . }}</p>{{ end }}
       <p class="hero-email"><a class="email-link" href="#" data-user="{{ $s.email_user }}" data-domain="{{ $s.email_domain }}"><span class="e-user">{{ $s.email_user }}</span><span class="e-at">@</span><span class="e-domain">{{ $s.email_domain }}</span></a></p>
-      <div class="hero-typing">
+      <div class="hero-typing" aria-label="研究方向">
         <span class="typing-prefix">研究方向：</span>
-        <span class="typing-text" id="typingText"></span>
-        <span class="typing-cursor">|</span>
+        <span class="typing-text" id="typingText">{{ delimit $s.researchTags " · " }}</span>
+        <span class="typing-cursor" aria-hidden="true">|</span>
       </div>
     </div>
     <div class="hero-avatar">
@@ -41,7 +41,7 @@
       {{ else }}
       <div class="metric-card">
       {{ end }}
-        <div class="metric-number" data-count="{{ .number }}">{{ .number }}<span class="metric-suffix">{{ .suffix }}</span></div>
+        <div class="metric-number" data-count="{{ .number }}"><span class="metric-value">{{ .number }}</span><span class="metric-suffix">{{ .suffix }}</span></div>
         <div class="metric-label">{{ .label }}</div>
         {{ with .note }}<div class="metric-note">{{ . }}</div>{{ end }}
       {{ if .link }}
@@ -107,10 +107,12 @@
 <!-- TYPING + COUNT-UP + TIMELINE GLOW SCRIPT -->
 <script>
 (function() {
-  var tags = [{{ range $i, $t := $s.researchTags }}{{ if $i }}, {{ end }}"{{ $t }}"{{ end }}];
+  var tags = {{ $s.researchTags | jsonify | safeJS }};
   var el = document.getElementById('typingText');
   var cursor = document.querySelector('.typing-cursor');
   if (!el || !tags.length) return;
+  /* Clear SSR text for animation start */
+  if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) { el.textContent = ''; }
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) { el.textContent = tags[0]; if (cursor) cursor.style.display = 'none'; return; }
   var tagIdx = 0, charIdx = 0, deleting = false, paused = false;
@@ -130,24 +132,25 @@
   setTimeout(tick, 600);
 })();
 
-/* Count-up */
+/* Count-up: only update .metric-value, keep .metric-suffix */
 (function() {
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var counted = new Set();
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (!entry.isIntersecting) return;
-      var num = parseInt(entry.target.getAttribute('data-count'));
-      if (isNaN(num) || counted.has(entry.target)) return;
-      counted.add(entry.target);
+      var box = entry.target;
+      var num = parseInt(box.getAttribute('data-count'));
+      if (isNaN(num) || counted.has(box)) return;
+      counted.add(box);
+      var valueEl = box.querySelector('.metric-value');
+      if (!valueEl) return;
       var start = 0, duration = 1200, startTime = null;
       function step(ts) {
         if (!startTime) startTime = ts;
         var progress = Math.min((ts - startTime) / duration, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
-        entry.target.textContent = Math.floor(start + (num - start) * eased);
-        var suffix = entry.target.nextElementSibling;
-        if (suffix && suffix.classList.contains('metric-suffix')) { /* keep suffix */ }
+        valueEl.textContent = Math.floor(start + (num - start) * eased);
         if (progress < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
