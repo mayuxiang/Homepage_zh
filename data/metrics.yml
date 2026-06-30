@@ -6,7 +6,7 @@ metrics:
   - number: 1000
     label: "被引次数"
     suffix: "+"
-    link: "/publications/"
+    link: "https://scholar.google.com/citations?user=x9u1TtwAAAAJ&hl=zh-CN"
   - number: 5
     label: "国家级/省部级项目"
     suffix: " 项"
