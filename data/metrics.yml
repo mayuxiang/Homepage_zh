@@ -3,9 +3,9 @@ metrics:
     label: "学术论文"
     suffix: " 篇"
     link: "/publications/"
-  - number: "1000+"
+  - number: 1000
     label: "被引次数"
-    suffix: ""
+    suffix: "+"
     link: "/publications/"
   - number: 5
     label: "国家级/省部级项目"
