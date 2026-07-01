@@ -16,7 +16,7 @@
         {{ range $pr.longitudinal }}
         {{/* Map Chinese status to a stable English class so new statuses never lose styling. */}}
         {{ $cls := "status-other" }}
-        {{ if eq .status "在研" }}{{ $cls = "status-active" }}{{ else if eq .status "结题" }}{{ $cls = "status-completed" }}{{ end }}
+        {{ if eq .status "在研" }}{{ $cls = "status-active" }}{{ else if eq .status "结项" }}{{ $cls = "status-completed" }}{{ end }}
         <div class="project-item">
           <div class="project-title">{{ .title }}</div>
           <div class="project-meta">
@@ -41,7 +41,7 @@
       <div class="project-list">
         {{ range $pr.horizontal }}
         {{ $cls := "status-other" }}
-        {{ if eq .status "在研" }}{{ $cls = "status-active" }}{{ else if eq .status "结题" }}{{ $cls = "status-completed" }}{{ end }}
+        {{ if eq .status "在研" }}{{ $cls = "status-active" }}{{ else if eq .status "结项" }}{{ $cls = "status-completed" }}{{ end }}
         <div class="project-item">
           <div class="project-title">{{ .title }}</div>
           <div class="project-meta">

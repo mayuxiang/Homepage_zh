@@ -3,7 +3,7 @@ longitudinal:
     source: "国家自然科学基金青年基金"
     period: "2023.01–2025.12"
     role: "主持"
-    status: "结题"
+    status: "结项"
     keywords: ["5G网联无人机", "可信接入", "资源受限"]
   - title: "复杂场景中网联无人机系统 GPU 资源共享机制研究"
     source: "河南省优秀青年科学基金"
@@ -15,19 +15,19 @@ longitudinal:
     source: "河南省重点研发与推广专项"
     period: "2022.01–2023.12"
     role: "主持"
-    status: "结题"
+    status: "结项"
     keywords: ["网络行为监管", "区块链", "5G安全"]
   - title: "面向大规模数据跨域传输的隐私保护与行为监管机制研究"
     source: "河南省重点研发与推广专项"
     period: "2020.01–2021.11"
     role: "主持"
-    status: "结题"
+    status: "结项"
     keywords: ["隐私保护", "跨域传输", "行为监管"]
   - title: "基于信息中心网络的遥感数据传输机制研究"
     source: "河南省科协人才项目"
     period: "2020.01–2021.12"
     role: "主持"
-    status: "结题"
+    status: "结项"
     keywords: ["信息中心网络", "遥感数据", "传输机制"]
   - title: "基于大模型的铁路勘察设计领域多智能体强化微调方法研究"
     source: "城市轨道交通数字化建设与测评技术国家工程研究中心开放课题"
