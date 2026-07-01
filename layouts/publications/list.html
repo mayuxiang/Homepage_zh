@@ -9,13 +9,12 @@
 
 <section class="page-content">
   <div class="container">
-    <!-- Year Filter -->
+    <!-- Year Filter (generated from data; add a paper of any year and it appears automatically) -->
+    {{ $years := slice }}
+    {{ range $p.selected }}{{ $years = $years | append .year }}{{ end }}
     <div class="pub-year-filter reveal">
-      <button class="active" data-filter="all">全部</button>
-      <button data-filter="2026">2026</button>
-      <button data-filter="2025">2025</button>
-      <button data-filter="2024">2024</button>
-      <button data-filter="2020">2020</button>
+      <button type="button" class="active" data-filter="all">全部</button>
+      {{ range (sort ($years | uniq) "value" "desc") }}<button type="button" data-filter="{{ . }}">{{ . }}</button>{{ end }}
     </div>
 
     <!-- Selected Papers -->
@@ -82,22 +81,4 @@
     {{ end }}{{ end }}
   </div>
 </section>
-
-<script>
-/* Year filter */
-(function() {
-  var btns = document.querySelectorAll('.pub-year-filter button');
-  var cards = document.querySelectorAll('.pub-card[data-year]');
-  btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      btns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var filter = btn.getAttribute('data-filter');
-      cards.forEach(function(card) {
-        card.style.display = (filter === 'all' || card.getAttribute('data-year') === filter) ? '' : 'none';
-      });
-    });
-  });
-})();
-</script>
 {{ end }}

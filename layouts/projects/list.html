@@ -14,13 +14,16 @@
       <h2>纵向科研项目</h2>
       <div class="project-list">
         {{ range $pr.longitudinal }}
+        {{/* Map Chinese status to a stable English class so new statuses never lose styling. */}}
+        {{ $cls := "status-other" }}
+        {{ if eq .status "在研" }}{{ $cls = "status-active" }}{{ else if eq .status "结题" }}{{ $cls = "status-completed" }}{{ end }}
         <div class="project-item">
           <div class="project-title">{{ .title }}</div>
           <div class="project-meta">
             <span class="project-source">{{ .source }}</span>
             <span class="project-period">{{ .period }}</span>
             <span class="project-role">{{ .role }}</span>
-            <span class="project-status project-status-{{ .status }}">{{ .status }}</span>
+            <span class="project-status {{ $cls }}">{{ .status }}</span>
           </div>
           {{ with .keywords }}
           <div class="project-keywords">
@@ -37,13 +40,15 @@
       <h2>横向合作项目</h2>
       <div class="project-list">
         {{ range $pr.horizontal }}
+        {{ $cls := "status-other" }}
+        {{ if eq .status "在研" }}{{ $cls = "status-active" }}{{ else if eq .status "结题" }}{{ $cls = "status-completed" }}{{ end }}
         <div class="project-item">
           <div class="project-title">{{ .title }}</div>
           <div class="project-meta">
             <span class="project-source">{{ .client }}</span>
             <span class="project-period">{{ .period }}</span>
             <span class="project-role">{{ .role }}</span>
-            <span class="project-status project-status-{{ .status }}">{{ .status }}</span>
+            <span class="project-status {{ $cls }}">{{ .status }}</span>
           </div>
           {{ with .keywords }}
           <div class="project-keywords">

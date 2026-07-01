@@ -3,15 +3,17 @@
 <section class="page-hero">
   <div class="container">
     <h1>研究方向</h1>
-    <p class="page-subtitle">围绕信息安全、智慧网络与可信智能开展研究。</p>
+    <p class="page-subtitle">围绕信息安全、智慧网络、具身智能与可信智能开展研究；下列为已形成论文与项目支撑的归纳性主线，具身智能方向正在推进中。</p>
   </div>
 </section>
 
 <section class="page-content">
   <div class="container">
+    {{/* Cycle through accent colors with mod so adding a 4th direction won't break the build. */}}
+    {{ $colors := slice "#2563EB" "#1D4ED8" "#3B82F6" }}
     {{ range $index, $dir := $s.researchDirections }}
-    <div class="content-card research-card reveal" style="border-left:3px solid {{ index (slice "#2563EB" "#06B6D4" "#7C3AED") $index }}">
-      {{ $color := index (slice "#2563EB" "#06B6D4" "#7C3AED") $index }}
+    {{ $color := index $colors (mod $index (len $colors)) }}
+    <div class="content-card research-card reveal" style="border-left:3px solid {{ $color }}">
       <div class="research-header">
         <h2>{{ $dir.title }}</h2>
       </div>

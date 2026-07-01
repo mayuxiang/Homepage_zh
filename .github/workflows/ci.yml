@@ -1,0 +1,33 @@
+name: CI
+# Production deploys are handled by Cloudflare Pages (connected to this GitHub repo).
+# This workflow only validates that the site builds. It does NOT deploy anywhere.
+
+on:
+  pull_request:
+  push:
+    branches: ["master"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Keep this version identical to the HUGO_VERSION set in Cloudflare Pages.
+      HUGO_VERSION: 0.161.1
+      HUGO_ENV: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.161.1"
+          extended: true
+      # Mirror the Cloudflare Pages production build so CI validates the real output.
+      - run: hugo --minify

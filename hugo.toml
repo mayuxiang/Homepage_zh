@@ -1,7 +1,9 @@
 baseURL = "https://mayuxiang.com"
-languageCode = "zh-CN"
+locale = "zh-CN"
 title = "马宇翔@河南大学"
-enableRobotsTXT = true
+
+# robots.txt is served from static/robots.txt (single source of truth), so the
+# built-in generator stays disabled (default) to avoid a duplicate at /robots.txt.
 
 disableKinds = ["taxonomy", "term", "RSS"]
 

@@ -1,24 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <!-- Redirect mayuxiang.github.io → mayuxiang.com (runs before page paint) -->
-  <script>
-  (function(){
-    var host = window.location.hostname;
-    if (host === 'mayuxiang.github.io') {
-      window.location.replace('https://mayuxiang.com' + window.location.pathname + window.location.search + window.location.hash);
-    }
-  })();
-  </script>
-  <!-- Anti-FOUC: set theme before paint -->
-  <script>
-  (function(){
-    var t = localStorage.getItem('theme');
-    if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-  })();
-  </script>
   <meta charset="utf-8">
+  {{/* Blocking head script (runs before first paint): domain redirect + theme init. */}}
+  {{ $head := resources.Get "js/head.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $head.RelPermalink }}" integrity="{{ $head.Data.Integrity }}"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {{ $s := .Site.Data.site }}
   {{ $desc := $s.oneliner }}
@@ -62,103 +48,13 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
-  <script>
-  /* Mobile menu */
-  (function () {
-    var btn = document.getElementById('mobileMenuBtn');
-    var nav = document.querySelector('.site-nav');
-    if (!btn || !nav) return;
-    btn.setAttribute('aria-expanded', 'false');
-    btn.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
-      if (open) {
-        var firstLink = nav.querySelector('.nav-link');
-        if (firstLink) setTimeout(function(){ firstLink.focus(); }, 100);
-      } else {
-        btn.focus();
-      }
-    });
-    nav.querySelectorAll('.nav-link').forEach(function (link) { link.addEventListener('click', function(){
-      nav.classList.remove('open'); btn.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-      btn.focus();
-    }); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) close(); });
-  })();
-  /* Theme toggle */
-  (function () {
-    var toggle = document.getElementById('themeToggle');
-    if (!toggle) return;
-    toggle.setAttribute('aria-pressed', document.documentElement.hasAttribute('data-theme') ? 'true' : 'false');
-    toggle.setAttribute('aria-label', document.documentElement.hasAttribute('data-theme') ? '切换到浅色主题' : '切换到深色主题');
-    toggle.addEventListener('click', function () {
-      var isDark = document.documentElement.hasAttribute('data-theme');
-      if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-        toggle.setAttribute('aria-pressed', 'false');
-        toggle.setAttribute('aria-label', '切换到深色主题');
-        toggle.textContent = '☾';
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        toggle.setAttribute('aria-pressed', 'true');
-        toggle.setAttribute('aria-label', '切换到浅色主题');
-        toggle.textContent = '☀';
-      }
-    });
-    toggle.textContent = document.documentElement.hasAttribute('data-theme') ? '☀' : '☾';
-  })();
-  /* Email protection */
-  (function () {
-    document.querySelectorAll('.email-link').forEach(function (el) {
-      var u = el.getAttribute('data-user'), d = el.getAttribute('data-domain');
-      if (!u || !d) return;
-      var addr = u + '@' + d;
-      el.addEventListener('click', function (e) { e.preventDefault(); window.location.href = 'mailto:' + addr; });
-      el.addEventListener('mouseenter', function () { if (!el.href || el.href === '#') el.href = 'mailto:' + addr; });
-    });
-  })();
-  /* Author highlight */
-  (function () {
-    document.querySelectorAll('[data-highlight]').forEach(function (el) {
-      var name = el.getAttribute('data-highlight');
-      if (!name) return;
-      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-      while (walker.nextNode()) {
-        var node = walker.currentNode, idx = node.textContent.indexOf(name);
-        if (idx === -1) continue;
-        var before = node.textContent.substring(0, idx);
-        var match = node.textContent.substring(idx, idx + name.length);
-        var after = node.textContent.substring(idx + name.length);
-        var frag = document.createDocumentFragment();
-        if (before) frag.appendChild(document.createTextNode(before));
-        var strong = document.createElement('strong');
-        strong.className = 'author-self'; strong.textContent = match;
-        frag.appendChild(strong);
-        if (after) frag.appendChild(document.createTextNode(after));
-        node.parentNode.replaceChild(frag, node);
-        break;
-      }
-    });
-  })();
-  /* Scroll reveal */
-  (function () {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry, i) {
-        if (entry.isIntersecting) {
-          setTimeout(function () { entry.target.classList.add('visible'); }, i * 60);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
-  })();
-  </script>
+  {{/* Deferred site-wide script. */}}
+  {{ $main := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $main.RelPermalink }}" integrity="{{ $main.Data.Integrity }}" defer></script>
+  {{ if .IsHome }}
+  {{/* Deferred homepage-only script. */}}
+  {{ $home := resources.Get "js/home.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $home.RelPermalink }}" integrity="{{ $home.Data.Integrity }}" defer></script>
+  {{ end }}
 </body>
 </html>
