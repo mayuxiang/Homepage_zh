@@ -112,7 +112,7 @@ h1,h2,h3,h4,.hero-name,.section-title,.page-hero h1{color:var(--color-ink)}
 .metric-card+.metric-card{border-left:1px solid var(--color-border-soft)}
 .metric-clickable:hover{background:linear-gradient(180deg,rgba(37,99,235,.04),rgba(37,99,235,.015));transform:none;box-shadow:none}
 .metric-number{font-family:var(--font-mono);font-size:clamp(2.4rem,4vw,3rem);font-weight:800;line-height:1;color:var(--color-primary);letter-spacing:-.04em;display:inline-flex;align-items:baseline;}
-.metric-suffix{margin-left:.15rem;font-family:var(--font-sans);font-size:.95rem;font-weight:700;color:var(--color-primary)}
+.metric-suffix{margin-left:.12rem;font-family:var(--font-mono);font-size:clamp(1.6rem,3vw,2rem);font-weight:800;color:var(--color-primary)}
 .metric-label{margin-top:.3rem;font-size:.94rem;font-weight:650;color:var(--color-ink)}
 
 /* ===== Focus Cards (shared: research, team overview, beyond) ===== */

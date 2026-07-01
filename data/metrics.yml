@@ -3,7 +3,7 @@ metrics:
     label: "学术论文"
     suffix: ""
     link: "/publications/"
-  - number: 1010
+  - number: 1000
     label: "被引次数"
     suffix: "+"
     link: "https://scholar.google.com/citations?user=x9u1TtwAAAAJ&hl=zh-CN"
