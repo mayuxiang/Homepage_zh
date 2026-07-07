@@ -49,7 +49,7 @@
         {{ range $t.admission.resources }}<li>{{ . }}</li>{{ end }}
       </ul>
       {{ with $t.admission.supplementNote }}
-      <h3 class="recruit-apply-title">补充说明</h3>
+      <h3 class="recruit-apply-title">{{ $t.admission.supplementTitle }}</h3>
       <p>{{ . }}</p>
       {{ end }}
       <h3 class="recruit-apply-title">如何申请</h3>
