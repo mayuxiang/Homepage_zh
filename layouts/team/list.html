@@ -39,14 +39,6 @@
       </div>
     </div>
 
-    <!-- Supplement: academic integrity -->
-    {{ with $t.supplement }}
-    <div class="content-card reveal">
-      <h2>{{ .heading }}</h2>
-      <p>{{ .content }}</p>
-    </div>
-    {{ end }}
-
     <!-- Recruitment -->
     <div class="content-card recruit-status-card reveal">
       <h2>招生信息</h2>
@@ -56,6 +48,10 @@
       <ul class="recruit-gain-list">
         {{ range $t.admission.resources }}<li>{{ . }}</li>{{ end }}
       </ul>
+      {{ with $t.admission.supplementNote }}
+      <h3 class="recruit-apply-title">补充说明</h3>
+      <p>{{ . }}</p>
+      {{ end }}
       <h3 class="recruit-apply-title">如何申请</h3>
       <p class="recruit-mail-note">请发送邮件至：<code><span class="e-user">{{ $s.email_user }}</span><span class="e-at">@</span><span class="e-domain">{{ $s.email_domain }}</span></code></p>
       <p class="recruit-apply-sub">邮件主题：{{ $t.admission.emailSubject }}。</p>
