@@ -39,6 +39,14 @@
       </div>
     </div>
 
+    <!-- Supplement: academic integrity -->
+    {{ with $t.supplement }}
+    <div class="content-card reveal">
+      <h2>{{ .heading }}</h2>
+      <p>{{ .content }}</p>
+    </div>
+    {{ end }}
+
     <!-- Recruitment -->
     <div class="content-card recruit-status-card reveal">
       <h2>招生信息</h2>
