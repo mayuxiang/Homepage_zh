@@ -120,6 +120,39 @@ function setStoredTheme(value) {
   els.forEach(function (el) { observer.observe(el); });
 })();
 
+/* ---- Email obfuscation - construct at runtime ---- */
+(function () {
+  function decode(user, domain) { return user + '@' + domain; }
+
+  // Hero email
+  var hero = document.getElementById('hero-email');
+  if (hero) {
+    var addr = decode(hero.getAttribute('data-user'), hero.getAttribute('data-domain'));
+    hero.textContent = addr;
+    hero.style.cursor = 'pointer';
+    hero.addEventListener('click', function () {
+      window.location.href = 'mailto:' + addr;
+    });
+  }
+
+  // Team page email text
+  var teamEmail = document.getElementById('team-email');
+  if (teamEmail) {
+    teamEmail.textContent = decode(teamEmail.getAttribute('data-user'), teamEmail.getAttribute('data-domain'));
+    teamEmail.style.cursor = 'text';
+  }
+
+  // Team page email button
+  var teamBtn = document.getElementById('team-email-btn');
+  if (teamBtn) {
+    var btnAddr = decode(teamBtn.getAttribute('data-user'), teamBtn.getAttribute('data-domain'));
+    var btnSubject = teamBtn.getAttribute('data-subject') || '';
+    teamBtn.addEventListener('click', function () {
+      window.location.href = 'mailto:' + btnAddr + (btnSubject ? '?subject=' + encodeURIComponent(btnSubject) : '');
+    });
+  }
+})();
+
 /* ---- Publications year filter (no-op on pages without the filter) ---- */
 (function () {
   var btns = document.querySelectorAll('.pub-year-filter button');

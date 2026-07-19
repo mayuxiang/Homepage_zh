@@ -13,7 +13,7 @@
       <p class="hero-honors">{{ delimit . " · " }}</p>
       {{ end }}
       {{ with $s.oneliner }}<p class="hero-oneliner">{{ . }}</p>{{ end }}
-      <p class="hero-email"><a class="email-link" href="mailto:{{ $s.email_user }}@{{ $s.email_domain }}"><span class="e-user">{{ $s.email_user }}</span><span class="e-at">@</span><span class="e-domain">{{ $s.email_domain }}</span></a></p>
+      <p class="hero-email"><span class="email-link" id="hero-email" data-user="{{ $s.email_user }}" data-domain="{{ $s.email_domain }}" style="cursor:pointer">[enable JavaScript]</span></p>
       <div class="hero-typing" aria-label="研究方向">
         <span class="typing-prefix">研究方向：</span>
         <span class="typing-text" id="typingText">{{ delimit $s.researchTags " · " }}</span>
