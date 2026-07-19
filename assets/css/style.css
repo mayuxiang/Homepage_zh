@@ -7,7 +7,7 @@
 
 /* ===== Tokens ===== */
 /* Single blue accent. Cyan/violet aliases fold into blue so the whole site stays unified. */
-:root{--color-primary:#2563EB;--color-primary-hover:#1D4ED8;--color-primary-light:#EFF6FF;--color-accent-cyan:#2563EB;--color-accent-violet:#2563EB;--gradient-holo:linear-gradient(120deg,#3B82F6 0%,#2563EB 100%);--glow-primary:none;--glow-cyan:none;--color-bg:#FFFFFF;--color-bg-soft:#F8FAFC;--color-surface:#FFFFFF;--color-surface-tint:#F3F7FF;--color-ink:#0F172A;--color-text:#334155;--color-muted:#64748B;--color-border:#E2E8F0;--color-border-soft:#EEF2F7;--color-success:#16A34A;--color-warning:#D97706;--max-width:1100px;--radius:14px;--radius-sm:8px;--shadow:0 1px 2px rgba(15,23,42,.04),0 10px 28px rgba(15,23,42,.05);--shadow-hover:0 12px 32px rgba(15,23,42,.08);--font-sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;--font-mono:"JetBrains Mono","SFMono-Regular","Menlo","Consolas",monospace}
+:root{--color-primary:#2563EB;--color-primary-hover:#1D4ED8;--color-primary-light:#EFF6FF;--color-accent-cyan:#2563EB;--color-accent-violet:#2563EB;--gradient-holo:linear-gradient(120deg,#3B82F6 0%,#2563EB 100%);--color-bg:#FFFFFF;--color-bg-soft:#F8FAFC;--color-surface:#FFFFFF;--color-surface-tint:#F3F7FF;--color-ink:#0F172A;--color-text:#334155;--color-muted:#64748B;--color-border:#E2E8F0;--color-border-soft:#EEF2F7;--color-success:#16A34A;--color-warning:#D97706;--max-width:1100px;--radius:14px;--radius-sm:8px;--shadow:0 1px 2px rgba(15,23,42,.04),0 10px 28px rgba(15,23,42,.05);--shadow-hover:0 12px 32px rgba(15,23,42,.08);--font-sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;--font-mono:"JetBrains Mono","SFMono-Regular","Menlo","Consolas",monospace}
 :root[data-theme="dark"]{--color-bg:#0B1220;--color-bg-soft:#0E1626;--color-surface:rgba(20,30,52,.66);--color-surface-tint:rgba(37,99,235,.08);--color-ink:#EEF3FF;--color-text:#C5CFE4;--color-muted:#8A97B5;--color-border:rgba(120,160,255,.16);--color-border-soft:rgba(120,160,255,.10);--color-primary-light:rgba(37,99,235,.12);--shadow:0 1px 2px rgba(0,0,0,.2),0 10px 28px rgba(0,0,0,.3);--shadow-hover:0 12px 32px rgba(0,0,0,.35)}
 
 /* ===== Reset ===== */
@@ -122,7 +122,7 @@ h1,h2,h3,h4,.hero-name,.section-title,.page-hero h1{color:var(--color-ink)}
 .focus-card h3{font-size:1.05rem;font-weight:700;color:var(--color-ink);margin-bottom:.35rem}
 .focus-card p{font-size:.92rem;color:var(--color-muted);line-height:1.6}
 .focus-num{font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:var(--color-primary);margin-bottom:.35rem}
-.focus-card-sm{padding:1.2rem 1rem!important}
+.research-focus-grid .focus-card.focus-card-sm{padding:1.2rem 1rem}
 .focus-card-sm h3{font-size:1.05rem;margin-bottom:.25rem}
 .focus-card-sm p{font-size:.92rem;line-height:1.7}
 .focus-num-sm{font-size:1.15rem;font-weight:700;color:var(--color-primary);margin-bottom:.25rem}
@@ -227,6 +227,10 @@ h1,h2,h3,h4,.hero-name,.section-title,.page-hero h1{color:var(--color-ink)}
 a:focus-visible,.btn:focus-visible,.nav-link:focus-visible,.theme-toggle:focus-visible,button:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s,transform .55s}
 .reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== Skip Link ===== */
+.skip-link{position:absolute;top:-100%;left:1rem;padding:.5rem 1rem;background:var(--color-primary);color:#fff;border-radius:0 0 var(--radius-sm) var(--radius-sm);z-index:200;font-weight:700;text-decoration:none;transition:top .2s}
+.skip-link:focus{top:0}
 
 /* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}

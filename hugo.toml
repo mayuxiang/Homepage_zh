@@ -7,6 +7,8 @@ title = "马宇翔@河南大学"
 
 disableKinds = ["taxonomy", "term", "RSS"]
 
+disableHugoGeneratorInject = true
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

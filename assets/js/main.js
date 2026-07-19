@@ -92,7 +92,6 @@ function setStoredTheme(value) {
       frag.appendChild(strong);
       if (after) frag.appendChild(document.createTextNode(after));
       node.parentNode.replaceChild(frag, node);
-      break;
     }
   });
 })();

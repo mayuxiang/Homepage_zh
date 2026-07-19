@@ -43,13 +43,13 @@
     <div class="content-card reveal">
       <h2>专著</h2>
       <div class="monograph-card">
-        <img src="/images/book-cover.jpg" alt="{{ $p.monograph.title }}" class="monograph-cover" loading="lazy" decoding="async">
+        <img src="/images/book-cover.jpg" alt="{{ $p.monograph.title }}" class="monograph-cover" width="712" height="1080" loading="lazy" decoding="async">
         <div class="monograph-info">
-          <div class="monograph-title"><a href="{{ $p.monograph.link }}" target="_blank" rel="noopener">{{ $p.monograph.title }}</a></div>
+          <div class="monograph-title">{{ with $p.monograph.link }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}{{ $p.monograph.title }}{{ with $p.monograph.link }}</a>{{ end }}</div>
           <div class="monograph-authors">{{ $p.monograph.authors }}</div>
           <div class="monograph-meta">{{ $p.monograph.publisher }}, {{ $p.monograph.year }}</div>
           <div class="monograph-meta">ISBN {{ $p.monograph.isbn }}</div>
-          <a href="{{ $p.monograph.link }}" target="_blank" rel="noopener" class="btn btn-secondary monograph-btn">Springer 链接</a>
+          {{ with $p.monograph.link }}<a href="{{ . }}" target="_blank" rel="noopener" class="btn btn-secondary monograph-btn">Springer 链接</a>{{ end }}
         </div>
       </div>
     </div>

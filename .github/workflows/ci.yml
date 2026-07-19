@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
       - uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.161.1"
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
       # Mirror the Cloudflare Pages production build so CI validates the real output.
       - run: hugo --minify

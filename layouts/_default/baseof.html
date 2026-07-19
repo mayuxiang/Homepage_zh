@@ -3,9 +3,42 @@
 <head>
   <meta charset="utf-8">
   {{/* Blocking head script (runs before first paint): domain redirect + theme init. */}}
-  {{ $head := resources.Get "js/head.js" | resources.Minify | resources.Fingerprint }}
-  <script src="{{ $head.RelPermalink }}" integrity="{{ $head.Data.Integrity }}"></script>
+  <script>
+  /* Runs in <head> before first paint. Keep it tiny and synchronous. */
+  (function () {
+    // Redirect the old GitHub Pages host to the canonical domain.
+    if (window.location.hostname === 'mayuxiang.github.io') {
+      window.location.replace(
+        'https://mayuxiang.com' +
+          window.location.pathname +
+          window.location.search +
+          window.location.hash
+      );
+      return;
+    }
+
+    // Apply the saved (or system) theme before paint to avoid a flash of the wrong theme.
+    var stored = null;
+    try {
+      stored = window.localStorage.getItem('theme');
+    } catch (e) {
+      /* localStorage may be blocked (private mode / disabled) */
+    }
+    if (!stored) {
+      stored =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+    }
+    if (stored === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
   {{ $s := .Site.Data.site }}
   {{ $desc := $s.oneliner }}
   {{ if .IsHome }}
@@ -21,7 +54,7 @@
   <meta property="og:title" content="{{ if .IsHome }}{{ $s.name }}@{{ $s.uni }}{{ else }}{{ .Title }} | {{ $s.name }}{{ end }}">
   <meta property="og:description" content="{{ if $desc }}{{ $desc }}{{ else }}{{ $s.name }} — {{ $s.affiliation }}{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:image" content="{{ .Site.BaseURL }}images/me.webp">
+  <meta property="og:image" content="{{ "images/me.webp" | absURL }}">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="{{ $s.name }} — {{ $s.affiliation }}">
 
@@ -29,7 +62,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ if .IsHome }}{{ $s.name }}（{{ $s.nameEn }}）— {{ $s.affiliation }}{{ else }}{{ .Title }} — {{ $s.name }}{{ end }}">
   <meta name="twitter:description" content="{{ if $desc }}{{ $desc }}{{ else }}{{ $s.name }} — {{ $s.affiliation }}{{ end }}">
-  <meta name="twitter:image" content="{{ .Site.BaseURL }}images/me.webp">
+  <meta name="twitter:image" content="{{ "images/me.webp" | absURL }}">
 
   <!-- hreflang -->
   <link rel="alternate" hreflang="x-default" href="{{ .Site.BaseURL }}">
@@ -38,13 +71,16 @@
 
   {{ partial "seo.html" . }}
   <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin-700.woff2" crossorigin>
   {{ $css := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}">
   <link rel="icon" type="image/png" href="/images/logo.png">
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">跳到主内容</a>
   {{ partial "header.html" . }}
-  <main>
+  <main id="main-content">
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}

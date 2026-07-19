@@ -1,5 +1,5 @@
 {{ $s := .Site.Data.site }}
-{{ $json := dict "@context" "https://schema.org" "@type" "Person" "name" $s.name "alternateName" $s.nameEn "jobTitle" $s.title "affiliation" (dict "@type" "Organization" "name" $s.affiliation) "url" .Site.BaseURL "image" (printf "%s%s" .Site.BaseURL "images/me.webp") "description" (or $s.oneliner (printf "%s — %s" $s.name $s.affiliation)) "sameAs" $s.sameAs }}
+{{ $json := dict "@context" "https://schema.org" "@type" "Person" "name" $s.name "alternateName" $s.nameEn "jobTitle" $s.title "affiliation" (dict "@type" "Organization" "name" $s.affiliation) "url" .Site.BaseURL "image" ("images/me.webp" | absURL) "description" (or $s.oneliner (printf "%s — %s" $s.name $s.affiliation)) "sameAs" $s.sameAs }}
 <!-- Schema.org Person -->
 <script type="application/ld+json">
 {{ $json | jsonify | safeJS }}
