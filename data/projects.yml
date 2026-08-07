@@ -10,7 +10,7 @@ longitudinal:
     period: "2025.01–2027.12"
     role: "主持"
     status: "在研"
-    keywords: ["GPU共享", "网联无人机", "资源调度"]
+    keywords: ["GPU调度", "网联无人机", "资源优化"]
   - title: "资源受限条件下 5G 网联无人机可信接入链路构建机制研究"
     source: "国家自然科学基金青年基金"
     period: "2023.01–2025.12"
